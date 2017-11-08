@@ -21,6 +21,7 @@ func update() {}
 
 func render(canvas *ebiten.Image) {
 	renderBackground(canvas)
+	renderColumns(canvas)
 }
 
 func init() {
