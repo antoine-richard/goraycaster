@@ -17,7 +17,9 @@ var (
 	canvas *ebiten.Image
 )
 
-func update() {}
+func update() {
+	rotatePlayer(0.01)
+}
 
 func render(canvas *ebiten.Image) {
 	renderBackground(canvas)
