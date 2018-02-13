@@ -2,8 +2,38 @@ package main
 
 import "math"
 
-var player = position{3, 3, 0}
+type player struct {
+	position
+	motion
+}
 
-func rotatePlayer(angle float64) {
-	player.direction = math.Mod(player.direction+angle+circle, circle)
+type motion struct {
+	walkFront bool
+	walkBack  bool
+	turnLeft  bool
+	turnRight bool
+}
+
+func (p *player) walk(distance float64) {
+	p.position.x += math.Cos(p.position.direction) * distance
+	p.position.y += math.Sin(p.position.direction) * distance
+}
+
+func (p *player) rotate(angle float64) {
+	p.position.direction = math.Mod(p.position.direction+angle+circle, circle)
+}
+
+func (p *player) update() {
+	if p.motion.walkFront {
+		p.walk(0.04)
+	}
+	if p.motion.walkBack {
+		p.walk(-0.04)
+	}
+	if p.motion.turnRight {
+		p.rotate(0.04)
+	}
+	if p.motion.turnLeft {
+		p.rotate(-0.04)
+	}
 }

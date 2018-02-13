@@ -13,7 +13,7 @@ const (
 	resolution            = 80
 	focalLength           = .8
 	columnSpacing float64 = screenWidth / resolution
-	viewRange     float64 = 8
+	viewRange     float64 = 100
 )
 
 type cell struct {
@@ -23,7 +23,7 @@ type cell struct {
 	height   int
 }
 
-func renderColumns(canvas *ebiten.Image) {
+func renderColumns(canvas *ebiten.Image, player position) {
 	for column := 0; column < resolution; column++ {
 		x := float64(column)/float64(resolution) - .5
 		angle := math.Atan2(x, focalLength)
@@ -41,7 +41,7 @@ func renderColumn(canvas *ebiten.Image, column int, cellsHit []cell, angle float
 	}
 	if firstHit < len(cellsHit) {
 		top, height := project(cellsHit[firstHit].height, angle, cellsHit[firstHit].distance)
-		ebitenutil.DrawRect(canvas, left, top, width, height, color.RGBA{64, 64, 64, 255})
+		ebitenutil.DrawRect(canvas, left, top, width, height, color.RGBA{48, 48, 48, 255})
 	}
 }
 
